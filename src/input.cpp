@@ -43,11 +43,11 @@ boolean input_get(String& data)
     gotData = true;
   }
   // If data received on serial
-  else if (Serial.available()) {
+  // else if (Serial.available()) {
     // Could check for string integrity here
-    data = Serial.readStringUntil('\n');
-    gotData = true;
-  }
+    // data = Serial.readStringUntil('\n');
+    // gotData = true;
+  // }
   // Get data from ATM90E26
   else {
     // Sestaviti string: CT:<številka>  ,Current:<stevilka>..
