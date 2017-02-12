@@ -25,6 +25,9 @@
 
 #include "emonesp.h"
 #include "input.h"
+#include "energyic_UART.h"
+#include "string"
+#include "sstream"
 
 String input_string="";
 String last_datastr="";
@@ -43,6 +46,30 @@ boolean input_get(String& data)
   else if (Serial.available()) {
     // Could check for string integrity here
     data = Serial.readStringUntil('\n');
+    gotData = true;
+  }
+  // Get data from ATM90E26
+  else {
+    // Sestaviti string: CT:<številka>  ,Current:<stevilka>..
+    String str_txt_vol, str_txt_cur, str_txt_ap, str_txt_pf, str_txt_comma;
+    str_txt_comma = String(",");  //comma
+    // Voltage
+    str_txt_vol = String("U:");
+    double _vol = GetLineVoltage();
+    // Current
+    str_txt_cur = String("I:");
+    double _cur = GetLineCurrent();
+    // Active power
+    str_txt_ap = String("P:");
+    double _ap = GetActivePower();
+    // Power Factor
+    str_txt_pf = String("PF:");
+    double _pf = GetPowerFactor();
+    // Build data string
+    data = str_txt_vol + _vol + str_txt_comma
+          + str_txt_cur + _cur + str_txt_comma
+          + str_txt_ap + _ap + str_txt_comma
+          + str_txt_pf + _pf;
     gotData = true;
   }
 

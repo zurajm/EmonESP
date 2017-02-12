@@ -22,7 +22,8 @@ deploy:
   - ".pioenvs/emonesp_deploy/firmware.bin"
   - ".pioenvs/emonesp_deploy/spiffs.bin"
   on:
-    repo: openenergymonitor/EmonESP
+    #repo: openenergymonitor/EmonESP
+    repo: zurajm/EmonESP-ATM90E26
     all_branches: true
     condition: $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$
 
