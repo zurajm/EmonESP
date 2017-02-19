@@ -50,6 +50,19 @@ boolean input_get(String& data)
   // }
   // Get data from ATM90E26
   else {
+    /*Repeatedly fetch some values from the ATM90E26 */
+    unsigned short s_status = GetSysStatus();
+    if(s_status == 0xFFFF)
+    {
+    #if defined(ESP8266)
+      //Read failed reset ESP, this is heavy
+      ESP.restart();
+    #endif
+    }
+    float Vrms = GetLineVoltage();
+    float Crms = GetLineCurrent();
+    float realPower = GetActivePower();
+    float powerFactor = GetPowerFactor();
     // Sestaviti string: CT:<številka>  ,Current:<stevilka>..
     String str_txt_vol, str_txt_cur, str_txt_ap, str_txt_pf, str_txt_comma;
     str_txt_comma = String(",");  //comma

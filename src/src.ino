@@ -65,6 +65,11 @@ void setup() {
   DEBUG.println("Server started");
 
   delay(100);
+
+  // Initialize ATM90E26
+  DEBUG.print("Start ATM90");
+  InitEnergyIC();
+  Wire.begin();
 } // end setup
 
 // -------------------------------------------------------------------
