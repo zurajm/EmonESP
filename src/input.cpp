@@ -56,6 +56,7 @@ boolean input_get(String& data)
       {
         #if defined(ESP8266)
         //Read failed reset ESP, this is heavy
+        DEBUG.println("Read failed, resetting ESP");
         ESP.restart();
         #endif
       }
